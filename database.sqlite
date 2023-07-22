@@ -1,0 +1,281 @@
+-- code for database.sqlite --
+
+Since the file database.sqlite is a database file, it does not contain code. It is a file that will be created and managed by the database management system (SQLite or PostgreSQL) that we have decided to use.
+
+To create the database and its tables, you will need to execute SQL statements. Here is an example of how you can create the necessary tables for the Outreach and Negotiation Assistant application:
+
+```sql
+-- Create the users table
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  role TEXT NOT NULL
+);
+
+-- Create the contacts table
+CREATE TABLE contacts (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  contact_info TEXT NOT NULL,
+  notes TEXT,
+  tags TEXT,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the communication_history table
+CREATE TABLE communication_history (
+  id INTEGER PRIMARY KEY,
+  contact_id INTEGER NOT NULL,
+  type TEXT NOT NULL,
+  content TEXT NOT NULL,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (contact_id) REFERENCES contacts (id)
+);
+
+-- Create the email_templates table
+CREATE TABLE email_templates (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  subject TEXT NOT NULL,
+  body TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the follow_up_reminders table
+CREATE TABLE follow_up_reminders (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  contact_id INTEGER NOT NULL,
+  reminder_date DATE NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (contact_id) REFERENCES contacts (id)
+);
+
+-- Create the email_tracking table
+CREATE TABLE email_tracking (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  email_id INTEGER NOT NULL,
+  recipient_email TEXT NOT NULL,
+  opened BOOLEAN DEFAULT FALSE,
+  clicked BOOLEAN DEFAULT FALSE,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the outreach_tracking table
+CREATE TABLE outreach_tracking (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  contact_id INTEGER NOT NULL,
+  status TEXT NOT NULL,
+  response_rate REAL,
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (contact_id) REFERENCES contacts (id)
+);
+
+-- Create the negotiation_plans table
+CREATE TABLE negotiation_plans (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  objectives TEXT NOT NULL,
+  strategies TEXT NOT NULL,
+  desired_outcomes TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the negotiation_progress table
+CREATE TABLE negotiation_progress (
+  id INTEGER PRIMARY KEY,
+  negotiation_id INTEGER NOT NULL,
+  milestone TEXT NOT NULL,
+  completed BOOLEAN DEFAULT FALSE,
+  FOREIGN KEY (negotiation_id) REFERENCES negotiation_plans (id)
+);
+
+-- Create the deal_terms table
+CREATE TABLE deal_terms (
+  id INTEGER PRIMARY KEY,
+  negotiation_id INTEGER NOT NULL,
+  terms TEXT NOT NULL,
+  FOREIGN KEY (negotiation_id) REFERENCES negotiation_plans (id)
+);
+
+-- Create the deal_status table
+CREATE TABLE deal_status (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  contact_id INTEGER NOT NULL,
+  status TEXT NOT NULL,
+  notes TEXT,
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (contact_id) REFERENCES contacts (id)
+);
+
+-- Create the deal_tasks table
+CREATE TABLE deal_tasks (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  contact_id INTEGER NOT NULL,
+  task TEXT NOT NULL,
+  completed BOOLEAN DEFAULT FALSE,
+  FOREIGN KEY (user_id) REFERENCES users (id),
+  FOREIGN KEY (contact_id) REFERENCES contacts (id)
+);
+
+-- Create the outreach_performance table
+CREATE TABLE outreach_performance (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  emails_sent INTEGER NOT NULL,
+  response_rate REAL,
+  conversion_rate REAL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the negotiation_success table
+CREATE TABLE negotiation_success (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  success_rate REAL,
+  closure_rate REAL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the deal_progress_insights table
+CREATE TABLE deal_progress_insights (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  insights TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the dashboard table
+CREATE TABLE dashboard (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  overview TEXT NOT NULL,
+  notifications TEXT,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the themes table
+CREATE TABLE themes (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  theme_name TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the responsive_design table
+CREATE TABLE responsive_design (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  device TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the speed_optimizations table
+CREATE TABLE speed_optimizations (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  optimization_name TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the two_factor_authentication table
+CREATE TABLE two_factor_authentication (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  method TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the encryption table
+CREATE TABLE encryption (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  encryption_method TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the data_backup table
+CREATE TABLE data_backup (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  backup_method TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the accessibility_compliance table
+CREATE TABLE accessibility_compliance (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  compliance_level TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the activity_logging table
+CREATE TABLE activity_logging (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  activity TEXT NOT NULL,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the user_engagement_metrics table
+CREATE TABLE user_engagement_metrics (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  time_spent INTEGER NOT NULL,
+  behavior TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the email_reminders table
+CREATE TABLE email_reminders (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  reminder_type TEXT NOT NULL,
+  reminder_date DATE NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the in_app_notifications table
+CREATE TABLE in_app_notifications (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  notification_type TEXT NOT NULL,
+  content TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the cloud_hosting table
+CREATE TABLE cloud_hosting (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  hosting_provider TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the ci_cd_tools table
+CREATE TABLE ci_cd_tools (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  tool_name TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Create the wcag_compliance table
+CREATE TABLE wcag_compliance (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  compliance_level TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+```
+
+Please note that this is just an example schema and you may need to modify it based on your specific requirements.
