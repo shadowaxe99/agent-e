@@ -1,0 +1,177 @@
+/* frontend.css */
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* User Management */
+.registration-form {
+  margin-bottom: 20px;
+}
+
+.login-form {
+  margin-bottom: 20px;
+}
+
+/* Contact Management */
+.contact-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.contact-item .name {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.contact-item .info {
+  margin-right: 10px;
+}
+
+.contact-item .actions {
+  margin-left: auto;
+}
+
+/* Outreach Management */
+.email-templates {
+  margin-bottom: 20px;
+}
+
+.follow-up-reminders {
+  margin-bottom: 20px;
+}
+
+.email-tracking {
+  margin-bottom: 20px;
+}
+
+.outreach-tracking {
+  margin-bottom: 20px;
+}
+
+/* Negotiation Management */
+.negotiation-plans {
+  margin-bottom: 20px;
+}
+
+.progress-tracking {
+  margin-bottom: 20px;
+}
+
+.deal-terms {
+  margin-bottom: 20px;
+}
+
+/* Deal Tracking */
+.deal-status {
+  margin-bottom: 20px;
+}
+
+.task-management {
+  margin-bottom: 20px;
+}
+
+/* Reporting and Analytics */
+.outreach-metrics {
+  margin-bottom: 20px;
+}
+
+.negotiation-rates {
+  margin-bottom: 20px;
+}
+
+.deal-progress {
+  margin-bottom: 20px;
+}
+
+/* User Interface */
+.dashboard {
+  margin-bottom: 20px;
+}
+
+.customizable-themes {
+  margin-bottom: 20px;
+}
+
+.responsive-design {
+  margin-bottom: 20px;
+}
+
+/* Performance and Security */
+.speed-optimizations {
+  margin-bottom: 20px;
+}
+
+.two-factor-authentication {
+  margin-bottom: 20px;
+}
+
+.encryption {
+  margin-bottom: 20px;
+}
+
+/* Integration with External Services */
+.google-calendar-integration {
+  margin-bottom: 20px;
+}
+
+.twilio-notifications {
+  margin-bottom: 20px;
+}
+
+/* Data Storage and Management */
+.database-management {
+  margin-bottom: 20px;
+}
+
+.data-backup-recovery {
+  margin-bottom: 20px;
+}
+
+/* Accessibility */
+.accessibility-compliance {
+  margin-bottom: 20px;
+}
+
+/* Performance Tracking */
+.activity-logging {
+  margin-bottom: 20px;
+}
+
+.user-engagement-metrics {
+  margin-bottom: 20px;
+}
+
+/* Notifications and Reminders */
+.email-reminders {
+  margin-bottom: 20px;
+}
+
+.in-app-notifications {
+  margin-bottom: 20px;
+}
+
+/* Deployment */
+.cloud-hosting {
+  margin-bottom: 20px;
+}
+
+.ci-cd-pipelines {
+  margin-bottom: 20px;
+}
